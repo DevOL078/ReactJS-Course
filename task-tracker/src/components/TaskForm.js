@@ -1,5 +1,6 @@
 import React from 'react';
-import './../assets/TaskForm.css'
+import './../assets/TaskForm.css';
+import Task from './../domain/Task';
 
 export default class TaskForm extends React.Component {
 
@@ -22,11 +23,15 @@ export default class TaskForm extends React.Component {
 		this.setState({
 			[name]: value
 		})
-		console.log(this.state);
 	}
 
 	onSubmit() {
-		this.props.saveTask(this.state);
+		this.props.saveTask(new Task(this.state));
+		this.setState({
+			name: '',
+			desc: '',
+			priority: ''
+		});
 	}
 
 	render() {
