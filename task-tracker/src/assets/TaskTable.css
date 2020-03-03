@@ -1,0 +1,20 @@
+.table {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.table-header {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: center;
+	background-color: #00910f;
+	border: 1px solid #ddd;
+	color: black;
+}
+
+.table-field {
+	border: 1px solid #ddd;
+	padding: 8px;
+	background-color: #1fd131;
+}
