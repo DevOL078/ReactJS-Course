@@ -11,51 +11,50 @@ const compare = (a,b) => {
 	return -1;
 }
 
-export default class TaskTable extends React.Component {
-
-	constructor(props) {
-		super(props);
-		
-		this.getItems = this.getItems.bind(this);
+const sortItems = (items, sortType) => {
+	switch(sortType) {
+		case SORT_TYPE.DEFAULT: return items;
+		case SORT_TYPE.NAME: return items.sort((a,b) => compare(a.name, b.name));
+		case SORT_TYPE.PRIORITY: return items.sort((a,b) => compare(a.priority, b.priority));
+		default: return [];
 	}
-
-	sortItems(items, type) {
-		switch(type) {
-			case SORT_TYPE.DEFAULT: return items;
-			case SORT_TYPE.NAME: return items.sort((a,b) => compare(a.name, b.name));
-			case SORT_TYPE.PRIORITY: return items.sort((a,b) => compare(a.priority, b.priority));
-			default: return [];
-		}
-	}
-
-	getItems() {
-		var items = this.sortItems(this.props.items, this.props.sortType);
-
-		return items.map((item) => 
-			<tr key={item.id}>
-				<td className="table-field">{item.name}</td>
-				<td className="table-field">{item.desc}</td>
-				<td className="table-field">{item.priority}</td>
-			</tr>
-		);
-	}
-
-	render() {
-		return(
-			<table className="table">
-				<thead>
-					<tr>
-						<th className="table-header" style={{ width: "20%" }}>Название</th>
-						<th className="table-header" style={{ width: "60%" }}>Описание</th>
-						<th className="table-header" style={{ width: "20%" }}>Приоритет</th>
-					</tr>
-				</thead>
-				<tbody>
-					{this.getItems()}
-				</tbody>
-			</table>
-		);
-	}
-
 }
 
+const TableRow = (props) => {
+	return (
+		<tr>
+			<td className="table-field">{props.item.name}</td>
+			<td className="table-field">{props.item.desc}</td>
+			<td className="table-field">{props.item.priority}</td>
+		</tr>
+	);
+}
+
+const TableBody = (props) => {
+	let items = sortItems(props.rows, props.sortType);
+	let compRows = items.map(row => 
+		<TableRow key={row.id} item={row}/>);
+	return (
+		<tbody>
+			{compRows}
+		</tbody>
+	);
+}
+
+const TaskTable = (props) => {
+
+	return(
+		<table className="table">
+			<thead>
+				<tr>
+					<th className="table-header" style={{ width: "20%" }}>Название</th>
+					<th className="table-header" style={{ width: "60%" }}>Описание</th>
+					<th className="table-header" style={{ width: "20%" }}>Приоритет</th>
+				</tr>
+			</thead>
+			<TableBody rows={props.items} sortType={props.sortType}/>
+		</table>
+	);
+}
+
+export default TaskTable;

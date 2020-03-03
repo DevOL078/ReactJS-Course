@@ -24,3 +24,15 @@ html, body, #root {
   font-size: 30px;
   font-family: cursive;
 }
+
+.row {
+	display: inline-flex;
+	width: 100%;
+}
+
+.col {
+	display: block;
+	position: relative;
+	width: auto;
+	margin: 30px;
+}
