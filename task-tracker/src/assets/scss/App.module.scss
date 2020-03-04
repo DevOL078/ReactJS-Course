@@ -1,8 +1,19 @@
 @import './vars.module.scss';
 
 .app-title {
+	display: flex;
+	flex-grow: 1;
+	flex-direction: row;
+	justify-content: center;
 	font-size: $app-title-font-size;
-	font-family: cursive;
+
+	&-theme-strict {
+		font-family: 'Times New Roman', Times, serif;
+	}
+
+	&-theme-fun {
+		font-family: cursive;
+	}
 }
 
 .container {
@@ -10,19 +21,76 @@
 	flex-direction: column;
 	width: 100%;
 	margin: auto;
+	padding: 20px 30px;
+	height: 100%;
+	position: relative;
+	display: block;
+	box-sizing: border-box;
+	overflow: auto;
+	margin: 0 auto;
+	overflow: auto;
+
+	&-theme-strict {
+		background-color: #ffffff;
+	}
+
+	&-theme-fun {
+		background-color: #24c775;
+	}
 }
 
 .row {
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	align-items: flex-start;
 	width: 100%;
+	
+	&-start {
+		justify-content: start;
+	}
+
+	&-center {
+		justify-content: center;
+	}
+
+	&-end {
+		justify-content: end;
+	}
 }
 
 .col {
 	display: flex;
 	flex-direction: column;
-	justify-content: start;
+	justify-content: left;
 	width: auto;
 	margin: 30px;
+}
+
+.radios {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+}
+
+.spacer {
+	display: flex;
+	flex-grow: 1;
+}
+
+.label {
+	font-size: $input-label-font-size;
+	font-size: 18px;
+
+	&-theme-strict {
+		font-family: 'Times New Roman', Times, serif;
+	}
+
+	&-theme-fun {
+		font-family: cursive;
+	}
+}
+
+input {
+	margin-top: 6px;
 }

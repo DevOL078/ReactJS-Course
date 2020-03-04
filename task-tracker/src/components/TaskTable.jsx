@@ -26,9 +26,9 @@ const sortItems = (items, sortType) => {
 const TableRow = (props) => {
 	return (
 		<tr>
-			<td className={cx('table-field')}>{props.item.name}</td>
-			<td className={cx('table-field')}>{props.item.desc}</td>
-			<td className={cx('table-field')}>{props.item.priority}</td>
+			<td className={cx('table-field', {[`table-field-theme-${props.theme}`]: true})}>{props.item.name}</td>
+			<td className={cx('table-field', {[`table-field-theme-${props.theme}`]: true})}>{props.item.desc}</td>
+			<td className={cx('table-field', {[`table-field-theme-${props.theme}`]: true})}>{props.item.priority}</td>
 		</tr>
 	);
 }
@@ -36,7 +36,7 @@ const TableRow = (props) => {
 const TableBody = (props) => {
 	let items = sortItems(props.rows, props.sortType);
 	let compRows = items.map(row => 
-		<TableRow key={row.id} item={row}/>);
+		<TableRow key={row.id} item={row} theme={props.theme}/>);
 	return (
 		<tbody>
 			{compRows}
@@ -50,12 +50,24 @@ const TaskTable = (props) => {
 		<table className={cx('table')}>
 			<thead>
 				<tr>
-					<th className={cx('table-header')} style={{ width: "20%" }}>Название</th>
-					<th className={cx('table-header')} style={{ width: "60%" }}>Описание</th>
-					<th className={cx('table-header')} style={{ width: "20%" }}>Приоритет</th>
+					<th className={cx('table-header', {[`table-header-theme-${props.theme}`]: true})} 
+						style={{ width: "20%" }}
+					>
+						Название
+					</th>
+					<th className={cx('table-header', {[`table-header-theme-${props.theme}`]: true})} 
+						style={{ width: "60%" }}
+					>
+						Описание
+					</th>
+					<th className={cx('table-header', {[`table-header-theme-${props.theme}`]: true})} 
+						style={{ width: "20%" }}
+					>
+						Приоритет
+					</th>
 				</tr>
 			</thead>
-			<TableBody rows={props.items} sortType={props.sortType}/>
+			<TableBody rows={props.items} sortType={props.sortType} theme={props.theme}/>
 		</table>
 	);
 }

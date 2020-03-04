@@ -41,16 +41,43 @@ export default class TaskForm extends React.Component {
 
 		return (
 			<div>
-		        <label htmlFor="name" className={cx('input-label')}>Название</label>
-	          	<input id="name" type="text" value={this.state.name} onChange={this.handleChange} />
+				<label htmlFor="name" 
+					className={cx('input-label', {[`input-label-theme-${this.props.theme}`]: true})}
+				>
+					Название
+				</label>
+				<input id="name" 
+					type="text" 
+					value={this.state.name} 
+					onChange={this.handleChange} 
+					className={cx('input', {[`input-theme-${this.props.theme}`]: true})}
+				/>
 		        <br />
-		        <label htmlFor="desc" className={cx('input-label')}>Описание</label>
-	          	<input id="desc" type="text" value={this.state.desc} onChange={this.handleChange} />
+				<label htmlFor="desc" 
+					className={cx('input-label', {[`input-label-theme-${this.props.theme}`]: true})}
+				>
+					Описание
+				</label>
+				<input id="desc" 
+					type="text" 
+					value={this.state.desc} 
+					onChange={this.handleChange} 
+					className={cx('input', {[`input-theme-${this.props.theme}`]: true})}
+					/>
 		        <br />
-		        <label htmlFor="priority" className={cx('input-label')}>Приоритет</label>
-	          	<input id="priority" type="number" value={this.state.priority} onChange={this.handleChange} />
+				<label htmlFor="priority" 
+					className={cx('input-label', {[`input-label-theme-${this.props.theme}`]: true})}
+				>
+					Приоритет
+				</label>
+				<input id="priority" 
+					type="number" 
+					value={this.state.priority}
+					onChange={this.handleChange}
+					className={cx('input', {[`input-theme-${this.props.theme}`]: true})}
+				/>
 		        <br />
-		        <button className={cx('button')} onClick={this.onSubmit}>Сохранить</button>
+		        <button className={cx('button', {[`button-theme-${this.props.theme}`]: true})} onClick={this.onSubmit}>Сохранить</button>
 	        </div>
 
 		);

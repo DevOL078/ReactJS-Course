@@ -1,17 +1,31 @@
 @import './vars.module.scss';
 @import './TaskList.module.scss';
 
-input[type=text], input[type=number] {
+.input {
     width: 100%;
     padding: 5px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
     box-sizing: border-box;
+
+    &-theme-strict {
+      border: 1px solid black;
+    }
+
+    &-theme-fun {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
   }
   
 .input-label {
     font-size: $input-label-font-size;
-    font-family: cursive;
+
+    &-theme-strict {
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    &-theme-fun {
+      font-family: cursive;
+    }
 }

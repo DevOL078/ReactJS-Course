@@ -11,14 +11,30 @@
 	padding-bottom: 12px;
 	text-align: center;
 	font-size: $table-header-font-size;
-	background-color: #00910f;
-	border: 1px solid #ddd;
 	color: black;
+
+	&-theme-strict {
+		background-color: grey;
+		border: 1px solid black;
+	}
+
+	&-theme-fun {
+		background-color: #00910f;
+		border: 1px dotted #ddd;
+	}
 }
 
 .table-field {
-	border: 1px solid #ddd;
 	font-size: $table-field-font-size;
 	padding: 8px;
-	background-color: #1fd131;
+
+	&-theme-strict {
+		background-color: white;
+		border: 1px solid black;
+	}
+
+	&-theme-fun {
+		background-color: #1fd131;
+		border: 1px dotted #ddd;
+	}
 }

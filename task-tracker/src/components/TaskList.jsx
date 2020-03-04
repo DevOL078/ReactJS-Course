@@ -26,22 +26,24 @@ export default class TaskList extends React.Component {
 	render() {
 		return (
 			<div>
-				<TaskTable items={this.props.tasks} sortType={this.state.sortType} />
-				<div className={cx('spacer')}></div>
+				{/* <div className={cx('spacer')}></div> */}
 				<div className={cx('row')}>
-					<button className={cx('button')} onClick={this.props.openForm}>
-						Создать
-					</button>
-					<button className={cx('button')} onClick={() => this.changeSortType(SORT_TYPE.NAME)}>
+					<button className={cx('button', {[`button-theme-${this.props.theme}`]: true})} 
+						onClick={() => this.changeSortType(SORT_TYPE.NAME)}>
 						Сортировать по названию
 					</button>
-					<button className={cx('button')} onClick={() => this.changeSortType(SORT_TYPE.PRIORITY)}>
+					<button className={cx('button', {[`button-theme-${this.props.theme}`]: true})} 
+						onClick={() => this.changeSortType(SORT_TYPE.PRIORITY)}>
 						Сортировать по приоритету
 					</button>
+					<button className={cx('button', {[`button-theme-${this.props.theme}`]: true})} 
+						onClick={this.props.openForm}>
+						Создать
+					</button>
 				</div>			
+				<TaskTable items={this.props.tasks} sortType={this.state.sortType} theme={this.props.theme}/>
 			</div>
 		);
 	}
 
-	
 }

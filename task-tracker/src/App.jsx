@@ -30,10 +30,12 @@ export default class App extends React.Component{
 					priority: 3
 				})
 			],
-			isFormVisible: false
+			isFormVisible: false,
+			theme: 'strict'
 		};
 		this.openForm = this.openForm.bind(this);
 		this.saveNewTask = this.saveNewTask.bind(this);
+		this.toogleTheme = this.toogleTheme.bind(this);
 	}
 
 	saveNewTask(task) {
@@ -55,17 +57,51 @@ export default class App extends React.Component{
 		});
 	}
 
+	toogleTheme(event) {
+		this.setState({
+			theme: event.target.value
+		});
+	}
+
 	render() {
 		return (
-			<div className={cx('container')}>
-				<p className={cx('app-title')}>Task Tracker</p>
+			<div className={cx('container', {[`container-theme-${this.state.theme}`]: true})}>
+				<div className={cx('row', 'row-start')}>
+					<div className={cx('radios')}>
+						<div className={cx('row', 'row-start')}>
+							<input id="strict" 
+								value="strict" 
+								type="radio"
+								checked={this.state.theme === "strict"}
+								onChange={this.toogleTheme}
+								/>
+							<label className={cx('label', {[`label-theme-${this.state.theme}`]: true})} htmlFor="strict">
+									Strict theme
+							</label>
+						</div>
+						<div className={cx('row', 'row-start')}>
+							<input id="fun" 
+								value="fun" 
+								type="radio"
+								checked={this.state.theme === "fun"}
+								onChange={this.toogleTheme}
+								/>
+							<label className={cx('label', {[`label-theme-${this.state.theme}`]: true})} htmlFor="fun">
+									Fun theme
+							</label>
+						</div>
+					</div>
+					<div className={cx('app-title', {[`app-title-theme-${this.state.theme}`]: true})}>
+						<p>Task Tracker</p>
+					</div>
+				</div>	
 				<div className={cx('row')}>
 					<div className={cx('col')}>
-						<TaskList tasks={this.state.tasks} openForm={this.openForm}/>
+						<TaskList tasks={this.state.tasks} openForm={this.openForm} theme={this.state.theme}/>
 					</div>
 					{ this.state.isFormVisible &&
 						<div className={cx('col')}>
-							<TaskForm saveTask={this.saveNewTask}/>
+							<TaskForm saveTask={this.saveNewTask} theme={this.state.theme}/>
 						</div>
 					}
 				</div>
