@@ -1,3 +1,5 @@
+@import './vars.module.scss';
+
 .table {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
@@ -8,6 +10,7 @@
 	padding-top: 12px;
 	padding-bottom: 12px;
 	text-align: center;
+	font-size: $table-header-font-size;
 	background-color: #00910f;
 	border: 1px solid #ddd;
 	color: black;
@@ -15,6 +18,7 @@
 
 .table-field {
 	border: 1px solid #ddd;
+	font-size: $table-field-font-size;
 	padding: 8px;
 	background-color: #1fd131;
 }

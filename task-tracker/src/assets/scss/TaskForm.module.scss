@@ -1,3 +1,6 @@
+@import './vars.module.scss';
+@import './TaskList.module.scss';
+
 input[type=text], input[type=number] {
     width: 100%;
     padding: 5px 20px;
@@ -8,7 +11,7 @@ input[type=text], input[type=number] {
     box-sizing: border-box;
   }
   
-  .input-label {
-      font-size: 20px;
-        font-family: cursive;
-  }
+.input-label {
+    font-size: $input-label-font-size;
+    font-family: cursive;
+}

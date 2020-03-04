@@ -1,21 +1,28 @@
+@import './vars.module.scss';
+
 .app-title {
-	font-size: 30px;
+	font-size: $app-title-font-size;
 	font-family: cursive;
 }
 
 .container {
-  width: 100%;
-  margin: auto;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin: auto;
 }
 
 .row {
-	display: inline-flex;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 	width: 100%;
 }
 
 .col {
-	display: block;
-	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
 	width: auto;
 	margin: 30px;
 }
