@@ -1,6 +1,9 @@
 import React from 'react';
-import './../assets/TaskTable.css'
-import { SORT_TYPE } from './../utils/Constants.js'
+import classnames from "classnames/bind";
+import styles from './../assets/scss/TaskTable.module.scss';
+import { SORT_TYPE } from '../utils/Constants.js'
+
+const cx = classnames.bind(styles);
 
 const compare = (a,b) => {
 	if(a > b) {
@@ -23,9 +26,9 @@ const sortItems = (items, sortType) => {
 const TableRow = (props) => {
 	return (
 		<tr>
-			<td className="table-field">{props.item.name}</td>
-			<td className="table-field">{props.item.desc}</td>
-			<td className="table-field">{props.item.priority}</td>
+			<td className={cx('table-field')}>{props.item.name}</td>
+			<td className={cx('table-field')}>{props.item.desc}</td>
+			<td className={cx('table-field')}>{props.item.priority}</td>
 		</tr>
 	);
 }
@@ -44,12 +47,12 @@ const TableBody = (props) => {
 const TaskTable = (props) => {
 
 	return(
-		<table className="table">
+		<table className={cx('table')}>
 			<thead>
 				<tr>
-					<th className="table-header" style={{ width: "20%" }}>Название</th>
-					<th className="table-header" style={{ width: "60%" }}>Описание</th>
-					<th className="table-header" style={{ width: "20%" }}>Приоритет</th>
+					<th className={cx('table-header')} style={{ width: "20%" }}>Название</th>
+					<th className={cx('table-header')} style={{ width: "60%" }}>Описание</th>
+					<th className={cx('table-header')} style={{ width: "20%" }}>Приоритет</th>
 				</tr>
 			</thead>
 			<TableBody rows={props.items} sortType={props.sortType}/>

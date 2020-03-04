@@ -1,9 +1,12 @@
 import React from 'react';
-import './assets/App.css';
+import classnames from "classnames/bind";
+import styles from './assets/scss/App.module.scss';
 
 import Task from './domain/Task';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
+
+const cx = classnames.bind(styles);
 
 export default class App extends React.Component{
 
@@ -54,14 +57,14 @@ export default class App extends React.Component{
 
 	render() {
 		return (
-			<div className="container">
-				<p id="app-title">Task Tracker</p>
-				<div className="row">
-					<div className="col">
+			<div className={cx('container')}>
+				<p className={cx('app-title')}>Task Tracker</p>
+				<div className={cx('row')}>
+					<div className={cx('col')}>
 						<TaskList tasks={this.state.tasks} openForm={this.openForm}/>
 					</div>
 					{ this.state.isFormVisible &&
-						<div className="col">
+						<div className={cx('col')}>
 							<TaskForm saveTask={this.saveNewTask}/>
 						</div>
 					}

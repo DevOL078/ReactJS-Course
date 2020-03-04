@@ -1,7 +1,10 @@
 import React from 'react';
-import './../assets/TaskList.css';
+import classnames from "classnames/bind";
+import styles from './../assets/scss/TaskList.module.scss';
 import TaskTable from './TaskTable';
-import { SORT_TYPE } from './../utils/Constants.js'
+import { SORT_TYPE } from '../utils/Constants.js';
+
+const cx = classnames.bind(styles);
 
 export default class TaskList extends React.Component {
 
@@ -24,15 +27,15 @@ export default class TaskList extends React.Component {
 		return (
 			<div>
 				<TaskTable items={this.props.tasks} sortType={this.state.sortType} />
-				<div className="spacer"></div>
-				<div className="row">
-					<button className="button" onClick={this.props.openForm}>
+				<div className={cx('spacer')}></div>
+				<div className={cx('row')}>
+					<button className={cx('button')} onClick={this.props.openForm}>
 						Создать
 					</button>
-					<button className="button" onClick={() => this.changeSortType(SORT_TYPE.NAME)}>
+					<button className={cx('button')} onClick={() => this.changeSortType(SORT_TYPE.NAME)}>
 						Сортировать по названию
 					</button>
-					<button className="button" onClick={() => this.changeSortType(SORT_TYPE.PRIORITY)}>
+					<button className={cx('button')} onClick={() => this.changeSortType(SORT_TYPE.PRIORITY)}>
 						Сортировать по приоритету
 					</button>
 				</div>			

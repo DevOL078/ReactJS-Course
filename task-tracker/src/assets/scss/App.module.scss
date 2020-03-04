@@ -1,0 +1,21 @@
+.app-title {
+	font-size: 30px;
+	font-family: cursive;
+}
+
+.container {
+  width: 100%;
+  margin: auto;
+}
+
+.row {
+	display: inline-flex;
+	width: 100%;
+}
+
+.col {
+	display: block;
+	position: relative;
+	width: auto;
+	margin: 30px;
+}

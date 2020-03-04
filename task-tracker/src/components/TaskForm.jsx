@@ -1,6 +1,9 @@
 import React from 'react';
-import './../assets/TaskForm.css';
-import Task from './../domain/Task';
+import classnames from 'classnames/bind';
+import styles from './../assets/scss/TaskForm.module.scss';
+import Task from '../domain/Task';
+
+const cx = classnames.bind(styles);
 
 export default class TaskForm extends React.Component {
 
@@ -38,16 +41,16 @@ export default class TaskForm extends React.Component {
 
 		return (
 			<div>
-		        <label htmlFor="name" className="input-label">Название</label>
+		        <label htmlFor="name" className={cx('input-label')}>Название</label>
 	          	<input id="name" type="text" value={this.state.name} onChange={this.handleChange} />
 		        <br />
-		        <label htmlFor="desc" className="input-label">Описание</label>
+		        <label htmlFor="desc" className={cx('input-label')}>Описание</label>
 	          	<input id="desc" type="text" value={this.state.desc} onChange={this.handleChange} />
 		        <br />
-		        <label htmlFor="priority" className="input-label">Приоритет</label>
+		        <label htmlFor="priority" className={cx('input-label')}>Приоритет</label>
 	          	<input id="priority" type="number" value={this.state.priority} onChange={this.handleChange} />
 		        <br />
-		        <button className="button" onClick={this.onSubmit}>Сохранить</button>
+		        <button className={cx('button')} onClick={this.onSubmit}>Сохранить</button>
 	        </div>
 
 		);
