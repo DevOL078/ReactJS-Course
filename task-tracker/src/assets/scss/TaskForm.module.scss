@@ -1,0 +1,32 @@
+@import './vars.module.scss';
+@import './TaskList.module.scss';
+
+.input {
+    width: 100%;
+    padding: 5px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+
+    &-theme-strict {
+      border: 1px solid black;
+      background-color: rgb(207, 204, 204);
+    }
+
+    &-theme-fun {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  }
+  
+.input-label {
+    font-size: $input-label-font-size;
+
+    &-theme-strict {
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    &-theme-fun {
+      font-family: cursive;
+    }
+}

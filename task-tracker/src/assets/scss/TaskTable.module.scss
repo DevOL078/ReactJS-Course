@@ -1,0 +1,40 @@
+@import './vars.module.scss';
+
+.table {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.table-header {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: center;
+	font-size: $table-header-font-size;
+	color: black;
+
+	&-theme-strict {
+		background-color: grey;
+		border: 1px solid black;
+	}
+
+	&-theme-fun {
+		background-color: #00910f;
+		border: 1px dotted #ddd;
+	}
+}
+
+.table-field {
+	font-size: $table-field-font-size;
+	padding: 8px;
+
+	&-theme-strict {
+		background-color: white;
+		border: 1px solid black;
+	}
+
+	&-theme-fun {
+		background-color: #1fd131;
+		border: 1px dotted #ddd;
+	}
+}
