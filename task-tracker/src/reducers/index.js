@@ -20,8 +20,6 @@ const compare = (a,b) => {
 const rootReducer = (state = defaultState, action) => {
     switch (action.type) {
         case NEW_TASK: {
-            console.log("NEW");
-
             return {
                 ...state,
                 editableTask: new Task()
@@ -41,9 +39,6 @@ const rootReducer = (state = defaultState, action) => {
         }
 
         case SAVE_TASK: {
-            console.log(state);
-            console.log(action.payload);
-
             let newTask = action.payload;
             let editIndex = state.tasks.findIndex(task => task.id === newTask.id);
             let tmpTasks;
