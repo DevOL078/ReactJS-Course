@@ -1,31 +1,28 @@
 import React from 'react';
+import { connect } from "react-redux";
+
 import classnames from "classnames/bind";
 import styles from './../assets/scss/TaskTable.module.scss';
-import { SORT_TYPE } from '../utils/Constants.js'
+
+import { editTask, deleteTask, setTaskFormVisibility } from "../actions";
 
 const cx = classnames.bind(styles);
-
-const compare = (a,b) => {
-	if(a > b) {
-		return 1;
-	} else if(a === b) {
-		return 0;
-	}
-	return -1;
-}
-
-const sortItems = (items, sortType) => {
-	switch(sortType) {
-		case SORT_TYPE.DEFAULT: return items;
-		case SORT_TYPE.NAME: return items.sort((a,b) => compare(a.name, b.name));
-		case SORT_TYPE.PRIORITY: return items.sort((a,b) => compare(a.priority, b.priority));
-		default: return [];
-	}
-}
 
 const TableRow = (props) => {
 	return (
 		<tr>
+			<td className={cx('table-field', {[`table-field-theme-${props.theme}`]: true})}>
+				<button className={cx('button', {[`button-theme-${props.theme}`]: true})}
+						onClick={() => props.editTask(props.item.id)}
+				>
+					Edit
+				</button>
+				<button className={cx('button', {[`button-theme-${props.theme}`]: true})}
+						onClick={() => props.deleteTask(props.item.id)}				
+				>
+					Delete
+				</button>
+			</td>
 			<td className={cx('table-field', {[`table-field-theme-${props.theme}`]: true})}>{props.item.name}</td>
 			<td className={cx('table-field', {[`table-field-theme-${props.theme}`]: true})}>{props.item.desc}</td>
 			<td className={cx('table-field', {[`table-field-theme-${props.theme}`]: true})}>{props.item.priority}</td>
@@ -33,10 +30,9 @@ const TableRow = (props) => {
 	);
 }
 
-const TableBody = (props) => {
-	let items = sortItems(props.rows, props.sortType);
-	let compRows = items.map(row => 
-		<TableRow key={row.id} item={row} theme={props.theme}/>);
+const TableBody = ({rows, theme, editTask, deleteTask}) => {
+	let compRows = rows.map(row => 
+		<TableRow key={row.id} item={row} theme={theme} editTask={editTask} deleteTask={deleteTask}/>);
 	return (
 		<tbody>
 			{compRows}
@@ -44,32 +40,60 @@ const TableBody = (props) => {
 	);
 }
 
-const TaskTable = (props) => {
+const mapStateToProps = state => ({
+	tasks: state.tasks,
+	theme: state.theme
+});
+
+const mapDispatchToProps = dispatch => ({
+	editTask: taskId => dispatch(editTask(taskId)),
+	deleteTask: taskId => dispatch(deleteTask(taskId)),
+	openForm: () => dispatch(setTaskFormVisibility(true))
+});
+
+const TaskTable = ({tasks, theme, editTask, deleteTask, openForm}) => {
+
+	function editItem(itemId) {
+		editTask(itemId);
+		openForm();
+	}
+
+	function deleteItem(itemId) {
+		deleteTask(itemId);
+	}
 
 	return(
 		<table className={cx('table')}>
 			<thead>
 				<tr>
-					<th className={cx('table-header', {[`table-header-theme-${props.theme}`]: true})} 
+					<th className={cx('table-header', {[`table-header-theme-${theme}`]: true})}
+						style={{ width: "10%" }}
+					></th>
+					<th className={cx('table-header', {[`table-header-theme-${theme}`]: true})} 
 						style={{ width: "20%" }}
 					>
 						Название
 					</th>
-					<th className={cx('table-header', {[`table-header-theme-${props.theme}`]: true})} 
-						style={{ width: "60%" }}
+					<th className={cx('table-header', {[`table-header-theme-${theme}`]: true})} 
+						style={{ width: "50%" }}
 					>
 						Описание
 					</th>
-					<th className={cx('table-header', {[`table-header-theme-${props.theme}`]: true})} 
+					<th className={cx('table-header', {[`table-header-theme-${theme}`]: true})} 
 						style={{ width: "20%" }}
 					>
 						Приоритет
 					</th>
 				</tr>
 			</thead>
-			<TableBody rows={props.items} sortType={props.sortType} theme={props.theme}/>
+			<TableBody 
+				rows={tasks} 
+				theme={theme} 
+				editTask={editItem} 
+				deleteTask={deleteItem}
+			/>
 		</table>
 	);
 }
 
-export default TaskTable;
+export default connect(mapStateToProps, mapDispatchToProps)(TaskTable);
