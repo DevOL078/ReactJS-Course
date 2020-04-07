@@ -1,28 +1,55 @@
 import React from 'react';
+import { connect } from "react-redux";
+
 import classnames from 'classnames/bind';
 import styles from './../assets/scss/TaskForm.module.scss';
+
+import { saveTask, setTaskFormVisibility } from "../actions";
 import Task from '../domain/Task';
 
 const cx = classnames.bind(styles);
 
-export default class TaskForm extends React.Component {
+const mapStateToProps = state => ({
+	editableTask: state.editableTask,
+	theme: state.theme
+});
+
+const mapDispatchToProps = dispatch => ({
+	saveTask: (task) => dispatch(saveTask(task)),
+	closeForm: () => dispatch(setTaskFormVisibility(false))
+});
+
+class TaskForm extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			name: '',
-			desc: '',
-			priority: ''
-		}
+			this.state = {
+				id: null,
+				name: '',
+				desc: '',
+				priority: ''
+			}
 		this.handleChange = this.handleChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
+	}
+
+	static getDerivedStateFromProps(props, state) {
+		let editableTask = props.editableTask
+		if(editableTask && state.id !== editableTask.id) {
+			return {
+				id: editableTask.id ? editableTask.id : null,
+				name: editableTask.name ? editableTask.name : '',
+				desc: editableTask.desc ? editableTask.desc : '',
+				priority: editableTask.priority ? editableTask.priority: ''
+			}
+		} 
+		return null;
 	}
 
 	handleChange(event) {
 		const name = event.target.id;
 		const value = event.target.value;
 
-		console.log(name);
 		this.setState({
 			[name]: value
 		})
@@ -31,10 +58,12 @@ export default class TaskForm extends React.Component {
 	onSubmit() {
 		this.props.saveTask(new Task(this.state));
 		this.setState({
+			id: null,
 			name: '',
 			desc: '',
 			priority: ''
 		});
+		this.props.closeForm();
 	}
 
 	render() {
@@ -85,3 +114,5 @@ export default class TaskForm extends React.Component {
 	}
 
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskForm);

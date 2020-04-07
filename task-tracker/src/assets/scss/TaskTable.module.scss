@@ -38,3 +38,29 @@
 		border: 1px dotted #ddd;
 	}
 }
+
+.button {
+	border: none;
+	font-size: 10;
+	padding: 5px;
+	min-width: 60px;
+	margin: 2px;
+
+	&-theme-strict {
+		background-color: black;
+		color: white
+	}
+
+	&-theme-strict:hover {
+		background-color: gray;
+	}
+
+	&-theme-fun {
+		background-color: #a691f2;
+		color: black
+	}
+
+	&-theme-fun:hover {
+		background-color: yellow;
+	}
+}
