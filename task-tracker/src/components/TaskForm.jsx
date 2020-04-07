@@ -23,23 +23,27 @@ class TaskForm extends React.Component {
 
 	constructor(props) {
 		super(props);
-		if(props.editableTask) {
-			this.state = {
-				id: props.editableTask.id ? props.editableTask.id : null,
-				name: props.editableTask.name ? props.editableTask.name : '',
-				desc: props.editableTask.desc ? props.editableTask.desc : '',
-				priority: props.editableTask.priority ? props.editableTask.priority: ''
-			}
-		} else {
 			this.state = {
 				id: null,
 				name: '',
 				desc: '',
 				priority: ''
 			}
-		}
 		this.handleChange = this.handleChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
+	}
+
+	static getDerivedStateFromProps(props, state) {
+		let editableTask = props.editableTask
+		if(editableTask && state.id !== editableTask.id) {
+			return {
+				id: editableTask.id ? editableTask.id : null,
+				name: editableTask.name ? editableTask.name : '',
+				desc: editableTask.desc ? editableTask.desc : '',
+				priority: editableTask.priority ? editableTask.priority: ''
+			}
+		} 
+		return null;
 	}
 
 	handleChange(event) {

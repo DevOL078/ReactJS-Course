@@ -29,7 +29,7 @@ const rootReducer = (state = defaultState, action) => {
         case EDIT_TASK: {
             let editIndex = state.tasks.findIndex(task => task.id === action.payload);
             if(editIndex >= 0) {
-                let editableTask = state.tasks[editIndex];
+                let editableTask = Object.assign({}, state.tasks[editIndex]);
                 return {
                     ...state,
                     editableTask: editableTask
